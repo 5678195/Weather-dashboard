@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            color: white;
+            padding: 30px;
+        }
+        h1 { text-align: center; font-size: 2.5rem; margin-bottom: 30px; color: #00d4ff; }
+        .search-box {
+            display: flex; justify-content: center; margin-bottom: 30px;
+        }
+        .search-box input {
+            padding: 12px 20px; font-size: 1rem; border: none;
+            border-radius: 25px 0 0 25px; width: 300px; outline: none;
+            background: rgba(255,255,255,0.1); color: white;
+        }
+        .search-box input::placeholder { color: rgba(255,255,255,0.5); }
+        .search-box button {
+            padding: 12px 25px; background: #00d4ff; border: none;
+            border-radius: 0 25px 25px 0; cursor: pointer;
+            font-size: 1rem; font-weight: bold; color: #1a1a2e;
+        }
+        .weather-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 30px;
+            max-width: 500px; margin: 0 auto 30px;
+            text-align: center; backdrop-filter: blur(10px);
+        }
+        .weather-card h2 { font-size: 2rem; margin-bottom: 10px; }
+        .temp { font-size: 4rem; font-weight: bold; color: #00d4ff; }
+        .desc { font-size: 1.2rem; text-transform: capitalize; margin: 10px 0; }
+        .details { display: flex; justify-content: space-around; margin-top: 20px; }
+        .details div { text-align: center; }
+        .details span { font-size: 1.5rem; font-weight: bold; color: #00d4ff; }
+        .forecast { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .forecast-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px; padding: 15px 20px;
+            text-align: center; min-width: 100px;
+        }
+        .forecast-card .f-temp { font-size: 1.5rem; color: #00d4ff; font-weight: bold; }
+        .error { text-align: center; color: #ff6b6b; font-size: 1.2rem; }
+        h3 { text-align: center; margin-bottom: 15px; font-size: 1.3rem; }
+    </style>
+</head>
+<body>
+    <h1>🌤 Weather Dashboard</h1>
+
+    <div class="search-box">
+        <form method="POST" style="display:flex">
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    {% if error %}
+        <p class="error">❌ {{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+    <div class="weather-card">
+        <h2>📍 {{ weather.name }}, {{ weather.sys.country }}</h2>
+        <div class="temp">{{ weather.main.temp | round }}°C</div>
+        <div class="desc">{{ weather.weather[0].description }}</div>
+        <div class="details">
+            <div><span>{{ weather.main.humidity }}%</span><br>Humidity</div>
+            <div><span>{{ weather.wind.speed }} m/s</span><br>Wind</div>
+            <div><span>{{ weather.main.feels_like | round }}°C</span><br>Feels Like</div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if forecast %}
+    <h3>📅 Next Forecast</h3>
+    <div class="forecast">
+        {% for f in forecast %}
+        <div class="forecast-card">
+            <div>{{ f.dt_txt[11:16] }}</div>
+            <div class="f-temp">{{ f.main.temp | round }}°C</div>
+            <div>{{ f.weather[0].main }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</body>
+</html>
