@@ -9,7 +9,7 @@ services:
       - redis
     environment:
         - FLASK_ENV=development
-  redis:
+   redis:
     restart: always
     image: redis:alpine
     ports:
