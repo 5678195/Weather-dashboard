@@ -8,8 +8,8 @@ services:
     depends_on:
       - redis
     environment:
-        - FLASK_ENV=development
-   redis:
+      - FLASK_ENV=development
+  redis:
     restart: always
     image: redis:alpine
     ports:
