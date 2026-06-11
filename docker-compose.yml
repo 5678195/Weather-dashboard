@@ -16,10 +16,11 @@ services:
   prometheus:
     image: prom/prometheus
     restart: always
-    expose:
-      - "9090"
+    ports:
+      - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
   grafana:
     image: grafana/grafana
     restart: always
@@ -27,8 +28,16 @@ services:
       - "3000:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
     depends_on:
       - prometheus
+  node-exporter:
+    image: prom/node-exporter
+    restart: always
+    expose:
+      - "9100"
   nginx:
     image: nginx:alpine
     restart: always
@@ -39,3 +48,6 @@ services:
     depends_on:
       - web
       - grafana
+volumes:
+  grafana_data:
+  prometheus_data:
