@@ -46,7 +46,7 @@ def index():
                 'q': city,
                 'appid': API_KEY,
                 'units': 'metric',
-                'cnt': 5
+                'cnt': 40
             })
             if f_response.status_code == 200:
                 forecast = f_response.json()['list']
