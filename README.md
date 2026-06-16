@@ -4,7 +4,7 @@ A production-ready weather dashboard built with Python Flask, Redis, Docker, and
 
 ## 🚀 Live Demo
 - **Weather App:** http://32.199.246.159:8080
-- **Grafana Monitoring:** http://32.199.246.159:3000
+- **Grafana Monitoring:**  http://32.199.246.159:3000
 ## 🛠️ Tech Stack
 - **Backend:** Python Flask
 - **Cache:** Redis
