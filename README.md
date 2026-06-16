@@ -3,7 +3,7 @@
 A production-ready weather dashboard built with Python Flask, Redis, Docker, and deployed on AWS EC2 with full CI/CD pipeline and monitoring stack.
 
 ## 🚀 Live Demo
-- **Weather App:** http://13.219.158.72:8080
+- **Weather App:** http://32.199.246.159:8080
 - **Grafana Monitoring:** http://13.219.158.72:3000
 
 ## 🛠️ Tech Stack
